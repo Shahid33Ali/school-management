@@ -81,7 +81,7 @@ const getAllTeachers = async (req, res) => {
         message: "There is no page available",
       });
     }
-    const totalPages = Math.floor(totalDocs / 10) + 1;
+    const totalPages = Math.ceil(totalDocs / 10);
     const allTeachers = await Teacher.find(query).limit(10).skip(start).lean();
     const pagination = {
       page: startIndex,
