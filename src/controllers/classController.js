@@ -53,7 +53,7 @@ const getAllClasses = async (req, res) => {
     const query = {};
     const start = (startIndex - 1) * 10;
     const totalDocs = await Class.countDocuments();
-    if (totalDocs.length === 0 || totalDocs < start) {
+    if (totalDocs.length === 0) {
       return res.status(404).json({
         success: false,
         data: [],
@@ -64,7 +64,14 @@ const getAllClasses = async (req, res) => {
         },
       });
     }
-    const totalPages = Math.floor(totalDocs / 10) + 1;
+    if (start >= totalDocs) {
+      return res.status(404).json({
+        success: false,
+        message: "There is no page available",
+      });
+    }
+
+    const totalPages = Math.ceil(totalDocs / 10);
     const allClasses = await Class.find(query).limit(10).skip(start).lean();
     const pagination = {
       page: startIndex,
@@ -127,4 +134,29 @@ const deleteClass = async (req, res) => {
     });
   }
 };
-module.exports = { createClass, getAllClasses, updateClass, deleteClass };
+const getClass = async (req, res) => {
+  try {
+    const existingClass = await Class.findById(req.params.id);
+    if (!existingClass) {
+      return res
+        .status(404)
+        .json({ success: false, message: "There is an error" });
+    }
+    return es
+      .status(404)
+      .json({ success: true, data: existingClass, message: "Found" });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({
+      success: false,
+      message: "There is an error",
+    });
+  }
+};
+module.exports = {
+  createClass,
+  getAllClasses,
+  updateClass,
+  deleteClass,
+  getClass,
+};

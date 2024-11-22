@@ -64,7 +64,7 @@ const getAllTeachers = async (req, res) => {
     }
     const start = (startIndex - 1) * 10;
     const totalDocs = await Teacher.countDocuments(query);
-    if (totalDocs.length === 0 || totalDocs < start) {
+    if (totalDocs.length === 0) {
       return res.status(404).json({
         success: false,
         data: [],
@@ -73,6 +73,12 @@ const getAllTeachers = async (req, res) => {
           pages: 1,
           total: 0,
         },
+      });
+    }
+    if (start >= totalDocs) {
+      return res.status(404).json({
+        success: false,
+        message: "There is no page available",
       });
     }
     const totalPages = Math.floor(totalDocs / 10) + 1;
