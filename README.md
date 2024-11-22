@@ -22,7 +22,7 @@ Also bonus features of Attendance, Exams , Results and Report Genreration are al
 - Add a new student, Get all students with pagination ,delete,update, photo uploadatiion etc.
 
 ### **2. Teachers**
-- Add a new teacher, Get all teachers with pagination and filtering, Assigning to class etc.
+- Add a new teacher, Get all teachers with pagination and filtering,Photo Uploadation, Assigning to class etc.
 
 ### **3. Classes**
 - Adding classes updatiing them and also aitomatically increasing count on an addition to class of a student.
@@ -267,7 +267,7 @@ npm run dev
 - for production
   
 ```bash
-npm run dev
+npm start
 ```
 
 
