@@ -184,4 +184,5 @@ module.exports = {
   getTeacher,
   deleteTeacher,
   updateTeacher,
+  uploadPhoto,
 };

@@ -6,9 +6,9 @@ const {
   getTeacher,
   deleteTeacher,
   updateTeacher,
+  uploadPhoto,
 } = require("../controllers/teacherController");
 const { jwtMiddleware } = require("../middlewares/jwtMilddleware");
-const { uploadPhoto } = require("../controllers/studentControllers");
 
 const router = express.Router();
 router.post("/", jwtMiddleware, upload.single("image"), createTeacher);
