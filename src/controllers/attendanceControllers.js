@@ -6,12 +6,12 @@ const attendanceSchema = z.object({
 });
 const addAttendanceSchema = z.object({
   classId: z.string(),
-  date: z.date().optional(),
+  date: z.string().date().optional(),
   attendance: z.array(attendanceSchema),
 });
 const updateAttendanceSchema = z.object({
   classId: z.string(),
-  date: z.date(),
+  date: z.string().date(),
   attendance: z.array(attendanceSchema),
 });
 const addAttendanceOfClass = async (req, res) => {
