@@ -6,7 +6,9 @@ const TeacherRouter = require("./routes/teacherRoutes");
 const ClassRouter = require("./routes/classRoutes");
 const StudentRouter = require("./routes/studenRoutes");
 const AdminRouter = require("./routes/adminRoute");
+const AttendanceRouter = require("./routes/attendanceRoutes");
 const mongoose = require("mongoose");
+
 app.use(cors());
 app.use(express.json());
 
@@ -21,6 +23,7 @@ app.use("/api/teachers", TeacherRouter);
 app.use("/api/class", ClassRouter);
 app.use("/api/students", StudentRouter);
 app.use("/admin/login", AdminRouter);
+app.use("/api/attendance", AttendanceRouter);
 app.get("/health", (req, res) => {
   res.json({ message: "Health is good" });
 });
