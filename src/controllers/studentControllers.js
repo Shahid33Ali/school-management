@@ -161,10 +161,38 @@ const updateStudent = async (req, res) => {
     });
   }
 };
+const uploadPhoto = async (req, res) => {
+  try {
+    const existingStudent = await Student.findById(req.query.id);
+    if (!existingStudent) {
+      return res
+        .status(404)
+        .json({ success: false, message: "There is no Student of this id" });
+    }
+    if (!req.file) {
+      return res
+        .status(400)
+        .json({ success: false, message: "There is no photo found" });
+    }
+    const uploadResponse = await addImageToCludinary(req.file);
+    existingStudent.profileImageUrl = uploadResponse.url;
+    await existingStudent.save();
+    return res
+      .status(200)
+      .json({ success: false, message: "The photo is updated" });
+  } catch (error) {
+    console.log(error.message);
+    res.status(400).json({
+      success: false,
+      message: "There is an error",
+    });
+  }
+};
 module.exports = {
   addStudent,
   getAllStudents,
   getStudent,
   deleteStudent,
   updateStudent,
+  uploadPhoto,
 };

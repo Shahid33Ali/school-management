@@ -5,12 +5,15 @@ const {
   getStudent,
   deleteStudent,
   updateStudent,
+  uploadPhoto,
 } = require("../controllers/studentControllers");
 const upload = require("../middlewares/multer");
+const { jwtMiddleware } = require("../middlewares/jwtMilddleware");
 const router = express.Router();
-router.post("/", upload.single("image"), addStudent);
+router.post("/", jwtMiddleware, upload.single("image"), addStudent);
 router.get("/", getAllStudents);
 router.get("/:id", getStudent);
-router.delete("/:id", deleteStudent);
-router.put("/:id", upload.single("image"), updateStudent);
+router.delete("/:id", jwtMiddleware, deleteStudent);
+router.put("/:id", jwtMiddleware, upload.single("image"), updateStudent);
+router.put("/:id/upload/photo", upload.single("image"), uploadPhoto);
 module.exports = router;

@@ -4,8 +4,9 @@ const {
   getAttendace,
   updateAttendanceOfClass,
 } = require("../controllers/attendanceControllers");
+const { jwtMiddleware } = require("../middlewares/jwtMilddleware");
 const router = express.Router();
-router.post("/all", addAttendanceOfClass);
+router.post("/all", jwtMiddleware, addAttendanceOfClass);
 router.get("/", getAttendace);
-router.put("/", updateAttendanceOfClass);
+router.put("/", jwtMiddleware, updateAttendanceOfClass);
 module.exports = router;

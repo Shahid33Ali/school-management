@@ -23,9 +23,9 @@ mongoose
     console.log(err);
   });
 app.use("/api/teachers", TeacherRouter);
-app.use("/api/class", ClassRouter);
+app.use("/api/classes", ClassRouter);
 app.use("/api/students", StudentRouter);
-app.use("/admin/login", AdminRouter);
+app.use("/api/admin/login", AdminRouter);
 app.use("/api/attendance", AttendanceRouter);
 app.use("/api/generate/report", ReportRouter);
 app.use("/api/exams", ExamRouter);
