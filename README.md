@@ -45,15 +45,6 @@ Also bonus features of Attendance, Exams , Results and Report Genreration are al
 
 ### **9. Exams and Marks Generation**
 - Exams and Results Generation of students.
-
----
-
-## Optional Bonus Features
-
-- Attendance tracking for students.
-- Manage exams and results for students.
-- Generate reports for a class listing all students and their assigned teacher.
-
 ---
 
 ## API Endpoints
@@ -119,7 +110,6 @@ Also bonus features of Attendance, Exams , Results and Report Genreration are al
     ```
 
 - **DELETE** `/teachers/:id`: Soft deletes a teacher.
-- **DELETE** `/teachers/:id`: Soft deletes a teacher.
 - **PUT** `/teachers/:id/upload/photo`: allows student to add photo by themeselves the other PUT request is authenticated.
 -   - **Request Body:**
     ```json
@@ -129,18 +119,19 @@ Also bonus features of Attendance, Exams , Results and Report Genreration are al
     ```
 
 #### **Classes**
-- **POST** `/classes`: Creates a new class.
+- **POST** `/classes`: Creates a new class. Recommended to not give count as we add student he/she will be directly added to class and increase count
   - **Request Body:**
     ```json
     {
       "name": "Grade 10A",
       "teacherId": "Teacher_ObjectId",
-      "studentCount": 30 //recommended to not give count as we add student he/she will be directly added to class and increase count
+      "studentCount": 30 
     }
     ```
 
 - **GET** `/classes/?page=2`: Fetches all classes with pagination and filtering using request paramaters such as page .
 - **GET** `/classes/:id`: Fetches a class by ID.
+- **DELETE** `/classes/:id`: Soft deletes a class.
 - **PUT** `/classes/:id`: Updates class details.
   - **Request Body:**
     ```json
@@ -180,7 +171,7 @@ Also bonus features of Attendance, Exams , Results and Report Genreration are al
     }
    ```
  - **GET** `/results/?subject=Maths&classId=23131&studentId=3123131&grade=A&examId=313131`: Fetches all exams and filtering using request paramaters such as subject .
- -  **GET** `/results/:id`: Fetches a exam by id .
+ - **GET** `/results/:id`: Fetches a exam by id .
    
  #### **Report Generation in Pdf**
  -  **GET** `/generate/report/:id`: Fetches a class by Id and all the students of the class and send a downloadable pdf document .
@@ -241,5 +232,42 @@ JWT_SECRET=your_jwt_secret
 # Admin credentials for initial setup
 ADMIN_USER=your_admin_email
 ADMIN_PASSWORD=your_admin_password
+
+#PORT
+PORT=The port of your choice
+
+```
+
+## Project Setup
+
+Follow these steps to set up and run the project locally:
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/Shahid33Ali/school-management.git
+cd school-management
+npm install
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure Environment Variables
+Create a .env file in the root directory and add the following environment variables as mentioned in the environment variables
+
+### 4. Run the Server
+- for development
+ 
+```bash
+npm run dev
+```
+- for production
+  
+```bash
+npm run dev
+```
 
 
