@@ -106,7 +106,7 @@ const getAttendace = async (req, res) => {
 };
 const updateAttendanceOfClass = async (req, res) => {
   try {
-    const { success, error } = addAttendanceSchema.safeParse(req.body);
+    const { success, error } = updateAttendanceSchema.safeParse(req.body);
     if (!success) {
       console.log(error);
       return res
