@@ -142,8 +142,8 @@ const getClass = async (req, res) => {
         .status(404)
         .json({ success: false, message: "There is an error" });
     }
-    return es
-      .status(404)
+    return res
+      .status(200)
       .json({ success: true, data: existingClass, message: "Found" });
   } catch (error) {
     console.log(error);

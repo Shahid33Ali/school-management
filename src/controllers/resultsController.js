@@ -67,5 +67,23 @@ const getResults = async (req, res) => {
     });
   }
 };
-
-module.exports = { addResults, getResults };
+const getResult = async (req, res) => {
+  try {
+    const existingResult = await Result.findById(req.params.id);
+    if (!existingResult) {
+      return res
+        .status(404)
+        .json({ success: false, message: "There is an error" });
+    }
+    return res
+      .status(200)
+      .json({ success: true, data: existingResult, message: "Found" });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({
+      success: false,
+      message: "There is an error",
+    });
+  }
+};
+module.exports = { addResults, getResults, getResult };
