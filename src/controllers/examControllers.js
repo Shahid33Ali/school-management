@@ -26,9 +26,8 @@ const createExam = async (req, res) => {
 };
 const getExams = async (req, res) => {
   try {
-    const { examId, subject } = req.query;
+    const { subject } = req.query;
     query = {};
-    if (examId) query.examId = examId;
     if (subject) query.subject = subject;
     const exams = await Exam.find(query);
     return res.status(200).json({ success: true, data: exams });
@@ -37,4 +36,18 @@ const getExams = async (req, res) => {
     res.status(500).json({ success: false, message: "Error getting exam" });
   }
 };
-module.exports = { createExam, getExams };
+const getExam = async (req, res) => {
+  try {
+    const exam = await Exam.find(req.params.id);
+    if (!exam) {
+      return res
+        .status(404)
+        .json({ seccess: false, message: "There is no exam of this id" });
+    }
+    return res.status(200).json({ success: true, data: exam });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Error getting exam" });
+  }
+};
+module.exports = { createExam, getExams, getExam };
